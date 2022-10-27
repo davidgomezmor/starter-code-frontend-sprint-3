@@ -79,9 +79,10 @@ function buy(id) {
             break;
         }
     }
-    console.log(cartList)
     
-
+   console.log(cartList)
+   document.getElementById("cart_list").innerHTML = cartList.length
+   document.getElementById("count_product").innerHTML = cartList.length
 
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
@@ -89,11 +90,19 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-
+    cartList = [];
+    document.getElementById("cart_list").innerHTML = cartList.length
+    document.getElementById("count_product").innerHTML = cartList.length
 }
 
 // Exercise 3
 function calculateTotal() {
+    for(i=0; i<=cartList.length; i++) {
+        
+        cartList.price).value)
+        
+    }
+    console.log(cartList.length)
     // Calculate total price of the cart using the "cartList" array
 }
 
