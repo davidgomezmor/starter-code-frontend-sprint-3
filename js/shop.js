@@ -79,11 +79,9 @@ function buy(id) {
             break;
         }
     }
-
-    console.log(cartList)
-    document.getElementById("cart_list").innerHTML = cartList.length
     document.getElementById("count_product").innerHTML = cartList.length
-    calculateTotal()
+    console.log(cartList)
+
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
 }
@@ -121,10 +119,12 @@ function generateCart() {
 
         if (cartItem === undefined) {
             cartListItem.quantity = 1
+            cartListItem.subTotal = cartListItem.price;
             cart.push(cartListItem);
         }
         else {
             cartItem.quantity++;
+            cartItem.subTotal = cartItem.price * cartItem.quantity;
         }
 
 
@@ -144,6 +144,7 @@ function applyPromotionsCart() {
 
     for (let i = 0; i < cart.length; i++) {
         const item = cart[i];
+        item.subtotalWithDiscount = item.subTotal;
         if (item.id === 1 && item.quantity >= 3) {
             item.subtotalWithDiscount = 10 * item.quantity
         }
@@ -151,13 +152,37 @@ function applyPromotionsCart() {
         if (item.id === 3 && item.quantity >= 10) {
             item.subtotalWithDiscount = item.price * item.quantity * 2 / 3
         }
-    // Apply promotions to each item in the array "cart"
-}
+        // Apply promotions to each item in the array "cart"
+    }
 }
 
 // Exercise 6
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+    generateCart()
+    //document.getElementById("cart_list").innerHTML = cart.length
+    calculateTotal()
+
+    var table = document.getElementById("cart_list");
+    table.innerHTML="";
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        // Create an empty <tr> element and add it to the 1st position of the table:
+        var row = table.insertRow(0);
+
+        // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+        var productName = row.insertCell(0);
+        var productPrice = row.insertCell(1);
+        var productQuantity = row.insertCell(2);
+        var productSubTotal = row.insertCell(3);
+
+        // Add some text to the new cells:
+        productName.innerHTML = item.name ;
+        productPrice.innerHTML = item.price;
+        productQuantity.innerHTML = item.quantity ;
+        productSubTotal.innerHTML = item.subtotalWithDiscount;
+
+    }
 }
 
 
