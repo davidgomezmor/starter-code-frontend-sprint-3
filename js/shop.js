@@ -124,11 +124,13 @@ function generateCart() {
             cart.push(cartListItem);
         }
         else {
-           cartItem.quantity++;
+            cartItem.quantity++;
         }
-        
+
 
     }
+
+    applyPromotionsCart();
     console.log(cart);
 
 }
@@ -139,7 +141,18 @@ function generateCart() {
 
 // Exercise 5
 function applyPromotionsCart() {
+
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.id === 1 && item.quantity >= 3) {
+            item.subtotalWithDiscount = 10 * item.quantity
+        }
+
+        if (item.id === 3 && item.quantity >= 10) {
+            item.subtotalWithDiscount = item.price * item.quantity * 2 / 3
+        }
     // Apply promotions to each item in the array "cart"
+}
 }
 
 // Exercise 6
