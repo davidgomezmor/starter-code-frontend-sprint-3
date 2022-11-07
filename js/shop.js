@@ -67,7 +67,7 @@ var products = [
 var cartList = [];
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-var cart = [];
+let cart = [];
 
 var total = 0;
 
@@ -75,7 +75,7 @@ var total = 0;
 function buy(id) {
     for (i = 0; i < products.length; i++) {
         if (products[i].id === id) {
-            cartList.push(products[id])
+            cartList.push(products[i])
             break;
         }
     }
@@ -83,7 +83,7 @@ function buy(id) {
     console.log(cartList)
     document.getElementById("cart_list").innerHTML = cartList.length
     document.getElementById("count_product").innerHTML = cartList.length
-
+    calculateTotal()
     // 1. Loop for to the array products to get the item to add to cart
     // 2. Add found product to the cartList array
 }
@@ -93,17 +93,18 @@ function cleanCart() {
     cartList = [];
     document.getElementById("cart_list").innerHTML = cartList.length
     document.getElementById("count_product").innerHTML = cartList.length
+    document.getElementById("total_price").innerHTML = total
 
 }
 
 // Exercise 3
 function calculateTotal() {
-let total = 0
-let i = 0
-for (i = 0; i < cartList.length; i++) {
-    total += cartList[i].price
+    let total = 0
+    let i = 0
+    for (i = 0; i < cartList.length; i++) {
+        total += cartList[i].price
 
-}
+    }
     document.getElementById("total_price").innerHTML = total
     // Calculate total price of the cart using the "cartList" array
 }
@@ -112,7 +113,29 @@ for (i = 0; i < cartList.length; i++) {
 function generateCart() {
     // Using the "cartlist" array that contains all the items in the shopping cart, 
     // generate the "cart" array that does not contain repeated items, instead each item of this array "cart" shows the quantity of product.
+    cart = [];
+    for (let i = 0; i < cartList.length; i++) {
+
+        const cartListItem = cartList[i];
+        const cartItem = cart.find(element => element.id === cartListItem.id);
+
+        if (cartItem === undefined) {
+            cartListItem.quantity = 1
+            cart.push(cartListItem);
+        }
+        else {
+           cartItem.quantity++;
+        }
+        
+
+    }
+    console.log(cart);
+
 }
+
+
+
+
 
 // Exercise 5
 function applyPromotionsCart() {
