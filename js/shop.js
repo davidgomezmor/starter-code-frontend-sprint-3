@@ -160,28 +160,27 @@ function applyPromotionsCart() {
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
     generateCart()
-    //document.getElementById("cart_list").innerHTML = cart.length
     calculateTotal()
 
-    var table = document.getElementById("cart_list");
+    const table = document.getElementById("cart_list");
     table.innerHTML="";
     for (let i = 0; i < cart.length; i++) {
         const item = cart[i];
         // Create an empty <tr> element and add it to the 1st position of the table:
-        var row = table.insertRow(0);
+        const row = table.insertRow(0);
 
         // Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
-        var productName = row.insertCell(0);
-        var productPrice = row.insertCell(1);
-        var productQuantity = row.insertCell(2);
-        var productSubTotal = row.insertCell(3);
+        const productName = row.insertCell(0);
+        const productPrice = row.insertCell(1);
+        const productQuantity = row.insertCell(2);
+        const productSubTotal = row.insertCell(3);
 
         // Add some text to the new cells:
         productName.innerHTML = item.name ;
         productPrice.innerHTML = item.price;
-        productQuantity.innerHTML = item.quantity ;
+        productQuantity.innerHTML = item.quantity;
         productSubTotal.innerHTML = item.subtotalWithDiscount;
-
+        
     }
 }
 
